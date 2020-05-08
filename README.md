@@ -16,19 +16,19 @@ verify_if_file_content_retrieved()
 verify_if_offset_increase_post_read()
 ```
 
-# Edge case test
+## Edge case test
 ```
 verify_upper_bound_edge_case()
 ```
 
-# Negative tests
+## Negative tests
 
 ```
 verify_retrieval_with_negative_numbers()
 verify_retrieval_above_max_limit_not_allowed()
 ```
 
-# NFR
+## NFR
 ```
 verify_response_time()
 ```
