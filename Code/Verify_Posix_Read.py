@@ -1,4 +1,5 @@
 import posix
+import time
 import logging
 
 logging.basicConfig()
@@ -64,9 +65,32 @@ def verify_retrieval_above_max_limit_not_allowed():
         logger.error("Overflow error")
 
 
+def verify_response_time():
+    start_time = time.time()
+    handle = posix.open("Large_Text", 2)
+    chars_to_be_retrieved = 100000
+    posix.read(handle, chars_to_be_retrieved)
+    end_time = time.time()
+    print("Time to read file large file " + str(end_time - start_time))
+    if end_time - start_time < 0.1:
+        print("Response time validated")
+    else:
+        logger.error("Response time validation failed")
+
+# Tests
+
+
 verify_file_accessibility()
 verify_if_file_content_retrieved()
 verify_if_offset_increase_post_read()
-verify_retrieval_with_negative_numbers()
+
+# Edge case test
+
 verify_upper_bound_edge_case()
+
+# Negative tests
+verify_retrieval_with_negative_numbers()
 verify_retrieval_above_max_limit_not_allowed()
+
+# NFR
+verify_response_time()
